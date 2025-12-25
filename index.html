@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess the Pixel Number</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    canvas {
+      border: 2px solid #38bdf8;
+      margin-top: 15px;
+      image-rendering: pixelated;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px;
+    }
+    #msg {
+      margin-top: 15px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎮 Guess the Pixel Number</h1>
+  <p>Adivinhe o número de pixels do quadrado</p>
+
+  <canvas id="canvas" width="160" height="160"></canvas>
+
+  <div>
+    <input type="number" id="guess" placeholder="Seu palpite">
+    <button onclick="check()">Enviar</button>
+  </div>
+
+  <div id="msg"></div>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const size = Math.floor(Math.random() * 8) + 3;
+    const pixelSize = 20;
+    const totalPixels = size * size;
+
+    ctx.fillStyle = "#38bdf8";
+    ctx.fillRect(0, 0, size * pixelSize, size * pixelSize);
+
+    function check() {
+      const guess = Number(document.getElementById("guess").value);
+      const msg = document.getElementById("msg");
+
+      if (guess === totalPixels) {
+        msg.textContent = "✅ Acertou! Eram " + totalPixels + " pixels.";
+      } else {
+        msg.textContent = "❌ Errou! Tente novamente.";
+      }
+    }
+  </script>
+
+</body>
+</html>
